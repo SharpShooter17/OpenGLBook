@@ -1,0 +1,42 @@
+// Shader oœwietlenia punktowego ADS
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+// Dane przychodz¹ce wierzcho³ków... po³o¿enie i normalna
+in vec4 vVertex;
+in vec3 vNormal;
+in vec2 vTexCoords0;
+
+
+uniform mat4   mvpMatrix;
+uniform mat4   mvMatrix;
+uniform mat3   normalMatrix;
+uniform vec3   vLightPosition;
+
+// Kolor do shadera fragmentów
+smooth out vec3 vVaryingNormal;
+smooth out vec3 vVaryingLightDir;
+smooth out vec2 vVaryingTexCoord;
+
+
+void main(void) 
+    {
+    // Przekazanie wspó³rzêdnych tekstury
+    vVaryingTexCoord = vTexCoords0;
+
+    // Obliczenie normalnej do powierzchni we wspó³rzêdnych oka
+    vVaryingNormal = normalMatrix * vNormal;
+
+    // Obliczenie po³o¿enia wierzcho³ka we wspó³rzêdnych oka
+    vec4 vPosition4 = mvMatrix * vVertex;
+    vec3 vPosition3 = vPosition4.xyz / vPosition4.w;
+
+    // Wektor do Ÿród³a œwiat³a
+    vVaryingLightDir = normalize(vLightPosition - vPosition3);
+
+
+    // Przekszta³cenie geometrii
+    gl_Position = mvpMatrix * vVertex;
+    }

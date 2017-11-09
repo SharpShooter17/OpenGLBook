@@ -1,0 +1,23 @@
+// Shader pud³a nieba
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+// Dane wejœciowe wierzcho³ków... tylko po³o¿enie
+in vec4 vVertex;
+
+uniform mat4   mvpMatrix;  // Macierz przekszta³cenia
+
+// Wspó³rzêdna tekstury do przekazania do shadera fragmentów
+varying vec3 vVaryingTexCoord;
+
+
+void main(void) 
+    {
+    // Przekazanie wspó³rzêdnych tekstury 
+    vVaryingTexCoord = normalize(vVertex.xyz);
+
+    // Przekszta³cenie geometrii
+    gl_Position = mvpMatrix * vVertex;
+    }

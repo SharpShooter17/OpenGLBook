@@ -1,0 +1,51 @@
+// Shader mapowania kuli
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+// Dane wejœciowe wierzcho³ków...po³o¿enie and normal
+in vec4 vVertex;
+in vec3 vNormal;
+
+uniform mat4   mvpMatrix;
+uniform mat4   mvMatrix;
+uniform mat3   normalMatrix;
+
+// Kolor do shadera fragmentów
+smooth out vec2 vVaryingTexCoord;
+
+
+// Generuje wspó³rzêdn¹ tekstury do na³o¿enia na kulê na podstawie normalnej do powierzchni przestrzeni oka
+// i wierzcho³ka przestrzeni oka.
+vec2 sphereMap(in vec3 normal, in vec3 ecPosition3)
+   {
+   float m;
+   vec3 r, u;
+   u = normalize(ecPosition3);
+   r = reflect(u, normal);
+   m = 2.0 * sqrt(r.x * r.x + r.y * r.y + (r.z + 1.0) * (r.z + 1.0));
+   return vec2 (r.x / m + 0.5, r.y / m + 0.5);
+   }
+
+
+
+
+void main(void) 
+    {
+    // Normalna w przestrzeni oka
+    vec3 vEyeNormal = normalMatrix * vNormal;
+    
+    // Po³o¿enie wierzcho³ka w przestrzeni oka
+    vec4 vVert4 = mvMatrix * vVertex;
+    vec3 vEyeVertex = vVert4.xyz / vVert4.w;
+    
+    
+    // Przekazanie wspó³rzêdnych tekstury
+    vVaryingTexCoord = sphereMap(vEyeNormal, vEyeVertex);
+    
+    
+
+    // Przekszta³cenie geometrii
+    gl_Position = mvpMatrix * vVertex;
+    }

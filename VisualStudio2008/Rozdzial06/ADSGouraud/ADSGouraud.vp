@@ -1,0 +1,57 @@
+// Shader oœwietlenia punktowego ADS
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+// Dane wejœciowe wierzcho³ków... po³o¿enie i normalna
+in vec4 vVertex;
+in vec3 vNormal;
+
+// Ustawienia dla procji danych
+uniform vec4    ambientColor;
+uniform vec4    diffuseColor;	
+uniform vec4    specularColor;
+
+uniform vec3	vLightPosition;
+uniform mat4	mvpMatrix;
+uniform mat4	mvMatrix;
+uniform mat3	normalMatrix;
+
+// Kolor do shadera fragmentów
+smooth out vec4 vVaryingColor;
+
+void main(void) 
+    { 
+    // Obliczanie normalnej do powierzchni we wspó³rzêdnych oka
+    vec3 vEyeNormal = normalMatrix * vNormal;
+
+    // Obliczenie po³o¿enia wierzcho³ka we wspó³rzêdnych oka
+    vec4 vPosition4 = mvMatrix * vVertex;
+    vec3 vPosition3 = vPosition4.xyz / vPosition4.w;
+
+    // Obliczenie wektora do Ÿród³a œwiat³a
+    vec3 vLightDir = normalize(vLightPosition - vPosition3);
+
+    // Obliczenie natê¿enia œwiat³a rozproszonego przy u¿yciu iloczynu skalarnego
+    float diff = max(0.0, dot(vEyeNormal, vLightDir));
+
+    // Pomno¿enie natê¿enia przez kolor rozproszenia, wartoœæ alfa wynosi 1.0
+    vVaryingColor = diff * diffuseColor;
+
+    // Dodanie œwiat³a otoczenia
+    vVaryingColor += ambientColor;
+
+
+    // Œwiat³a odbicia zwierciadlanego
+    vec3 vReflection = normalize(reflect(-vLightDir, vEyeNormal));
+    float spec = max(0.0, dot(vEyeNormal, vReflection));
+    if(diff != 0) {
+        float fSpec = pow(spec, 128.0);
+        vVaryingColor.rgb += vec3(fSpec, fSpec, fSpec);
+	}
+
+
+    // Przekszta³cenie geometrii!
+    gl_Position = mvpMatrix * vVertex;
+    }

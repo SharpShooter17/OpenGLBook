@@ -1,0 +1,17 @@
+// Shader p³aski
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+// Macierz przekszta³cenia
+uniform mat4	mvpMatrix;
+
+// Dane przychodz¹ce wierzcho³ków
+in vec4 vVertex;
+
+void main(void) 
+    { 
+    // To wszystko, a wiêc przekszta³camy geometriê
+    gl_Position = mvpMatrix * vVertex;
+    }

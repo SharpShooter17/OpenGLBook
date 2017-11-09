@@ -1,0 +1,16 @@
+// Starfield Shader
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+// Dane przychodz¹ce wierzcho³ków... po³o¿enie
+in vec4 vVertex;
+
+uniform mat4   mvpMatrix;
+
+void main(void) 
+    {
+    // Przekszta³cenie geometrii
+    gl_Position = mvpMatrix * vVertex;
+    }

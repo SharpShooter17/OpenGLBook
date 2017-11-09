@@ -1,0 +1,24 @@
+// Shader tekstury prostok¹tnej
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 140
+
+// Dane wejœciowe wierzcho³ków... po³o¿enie i wspó³rzêdne tekstury
+in vec4 vVertex;
+in vec2 vTexCoord;
+
+uniform mat4   mvpMatrix;
+
+// Wspó³rzêdna tekstury do shadera fragmentów
+smooth out vec2 vVaryingTexCoord;
+
+
+void main(void) 
+    {
+    // Przekazanie wspó³rzêdnych tekstury
+    vVaryingTexCoord = vTexCoord;
+    
+    // Przekszta³cenie geometrii
+    gl_Position = mvpMatrix * vVertex;
+    }

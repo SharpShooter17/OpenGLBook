@@ -1,0 +1,20 @@
+﻿Build started 2015-11-11 14:04:14.
+     1>Project "C:\Users\user\Desktop\Programowanie\OpenGL\Kody poprawione\VisualStudio2008\Rozdzial02\Triangle\Triangle.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\user\Desktop\Programowanie\OpenGL\Kody poprawione\VisualStudio2008\Rozdzial02\Triangle\Debug\Triangle.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\user\Desktop\Programowanie\OpenGL\Kody poprawione\VisualStudio2008\Rozdzial02\Triangle\Debug\Triangle.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\user\Desktop\Programowanie\OpenGL\Kody poprawione\VisualStudio2008\Rozdzial02\Triangle\Debug\Triangle.lib" /MACHINE:X86 /SAFESEH Debug\Triangle.obj
+         "..\..\..\freeglut-2.6.0\VisualStudio2008Static\Release\freeglut_static.lib"
+         ..\..\GLTools\Release\gltools.lib
+     1>Triangle.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>freeglut_static.lib(freeglut_init.obj) : error LNK2019: unresolved external symbol _sscanf referenced in function _glutInit
+     1>freeglut_static.lib(freeglut_main.obj) : error LNK2019: unresolved external symbol _vfprintf referenced in function _fgError
+     1>freeglut_static.lib(freeglut_main.obj) : error LNK2019: unresolved external symbol ___iob_func referenced in function _fgError
+     1>freeglut_static.lib(freeglut_display.obj) : error LNK2001: unresolved external symbol ___iob_func
+     1>gltools.lib(GLTools.obj) : error LNK2001: unresolved external symbol ___iob_func
+     1>freeglut_static.lib(freeglut_joystick.obj) : error LNK2019: unresolved external symbol __snprintf referenced in function _fghJoystickGetOEMProductName
+     1>C:\Users\user\Desktop\Programowanie\OpenGL\Kody poprawione\VisualStudio2008\Rozdzial02\Triangle\Debug\Triangle.exe : fatal error LNK1120: 4 unresolved externals
+     1>Done Building Project "C:\Users\user\Desktop\Programowanie\OpenGL\Kody poprawione\VisualStudio2008\Rozdzial02\Triangle\Triangle.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.93

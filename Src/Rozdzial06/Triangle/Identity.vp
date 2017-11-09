@@ -1,0 +1,12 @@
+// Shader identycznoœciowy
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+in vec4 vVertex;
+
+void main(void) 
+    { 
+    gl_Position = vVertex;
+    }

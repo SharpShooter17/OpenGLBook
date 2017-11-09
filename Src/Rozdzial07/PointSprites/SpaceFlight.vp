@@ -1,0 +1,37 @@
+// Shader SpaceFlight
+// Shader wierzcho³ków
+// Richard S. Wright Jr.
+// OpenGL. Ksiêga eksperta
+#version 130
+
+// Dane wejœciowe wierzcho³ków...po³o¿enie i normalna
+in vec4 vVertex;
+in vec4 vColor;
+
+uniform mat4   mvpMatrix;
+uniform float  timeStamp;
+
+out vec4 vStarColor;
+
+void main(void) 
+    {
+    vec4 vNewVertex = vVertex;
+    vStarColor = vColor;
+    
+    // Przesuniêcie wg czasu, przysuwa bli¿ej
+    vNewVertex.z += timeStamp;
+    
+    // Jeœli poza zakresem, to dostosuj
+    if(vNewVertex.z > -1.0)
+        vNewVertex.z -= 999.0;
+
+    gl_PointSize = 30.0 + (vNewVertex.z / sqrt(-vNewVertex.z));
+
+    // Jeœli s¹ bardzo ma³e, to je wygaœ
+    if(gl_PointSize < 4.0)
+        vStarColor = smoothstep(0.0, 4.0, gl_PointSize) * vStarColor;
+
+
+    // Przekszta³cenie geometrii
+    gl_Position = mvpMatrix * vNewVertex;
+    }
